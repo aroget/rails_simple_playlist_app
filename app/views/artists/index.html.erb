@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-8">
+    <h2>Artists <small class="text-muted">List</small></h2>
+  </div>
+  <div class="col-4 text-sm-right">
+    <%= link_to "New Artist", new_artist_path, class: "btn btn btn-primary" %>
+  </div>
+</div>
+
+<% if @artists.empty? %>
+<div class="row">
+  <div class="col-8">
+    <p>No Artists....</p>
+  </div>
+</div>
+<% else %>
+<div class="row">
+  <div class="col-12">
+    <ul class="list-unstyled">
+      <% @artists.each do |artist| %>
+        <li class="media my-4">
+          <img class="mr-3" src="https://www.placehold.it/64x64" alt="Generic placeholder image">
+          <div class="media-body">
+            <h5><%= artist.name %></h5>
+            <div>
+              <%= link_to "Edit", edit_artist_url(artist.id) %>
+              <%= link_to "Details", artist_path(artist) %>
+              <%= link_to "Delete", artist_path(artist), method: :delete %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<% end %>

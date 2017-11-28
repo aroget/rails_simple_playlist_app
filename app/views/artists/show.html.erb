@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-8">
+    <h2>Artist <small class="text-muted"><%= @artist.name %></small></h2>
+  </div>
+  <div class="col-4 text-sm-right">
+    <%= link_to "Back to Artist", artists_path, class: "btn btn btn-link" %>
+  </div>
+</div>
+
+<% if @genres.empty? %>
+<div class="row">
+  <div class="col-8">
+  <p>No Genres...</p>
+  </div>
+</div>
+<% else %>
+<div class="row">
+  <div class="col-8">
+    <ul class="nav">
+      <% @genres.each do |genre| %>
+        <li class="nav-item">
+          <%= link_to genre.name, genre_path(genre), class: "nav-link" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<% end %>
+
+<br/>
+
+<% if @albums.empty? %>
+<div class="row">
+  <div class="col-8">
+  <p>No Albums</p>
+  </div>
+</div>
+<% else %>
+<div class="row">
+  <div class="col-8">
+    <h5>Albums <%= link_to 'All Albums', artist_albums_path(@artist) %></h5>
+    <ul class="list-unstyled">
+    <% @albums.each do |album| %>
+      <li class="media my-4">
+        <img class="mr-3" src="https://www.placehold.it/64x64" alt="Generic placeholder image">
+        <div class="media-body">
+          <h5><%= album.name %></h5>
+          <%= link_to 'Details', artist_album_path(@artist, album.id) %>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</div>
+<% end %>
+
+<% if @songs.empty? %>
+<div class="row">
+  <div class="col-8">
+    <p>No Songs...</p>
+  </div>
+</div>
+<% else %>
+<div class="row">
+  <div class="col-8">
+    <h5>Top Songs</h5>
+      <ul>
+      <% @songs.each do |song| %>
+        <li><%= link_to song.name, artist_album_song_path(@artist, song.album_id, song.id) %></li>
+      <% end %>
+      </ul>
+  </div>
+</div>
+<% end %>

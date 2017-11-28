@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-8">
+    <h2>Genre <small class="text-muted"><%= @genre.name %></small></h2>
+  </div>
+  <div class="col-4 text-sm-right">
+    <%= link_to "New Genre", new_genre_path, class: "btn btn btn-primary" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-8">
+    <% if @albums.empty? %>
+      <p>No Albums in genre</p>
+    <% else %>
+    <ul class="list-unstyled">
+      <% @albums.each do |album| %>
+        <li class="media my-4">
+          <img class="mr-3" src="https://www.placehold.it/64x64" alt="Generic placeholder image">
+          <div class="media-body">
+            <h5><%= album.name %></h5>
+            <%= link_to 'Details', artist_album_path(album.artist, album.id) %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+    <% end %>
+  </div>
+</div>
+

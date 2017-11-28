@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-8">
+    <h2>Songs <small class="text-muted"><%= @playlist.name %></small></h2>
+  </div>
+  <div class="col-4 text-sm-right">
+    <%= link_to "Back", new_playlist_path, class: "btn btn btn-link" %>
+  </div>
+</div>
+
+<br/>
+
+<div class="row">
+  <div class="col-8">
+    <h5>Added</h5>
+    <% if @playlist.songs.empty? %>
+    <div class="row">
+      <div class="col-8">
+        <p>No Songs...</p>
+      </div>
+    </div>
+    <% else %>
+    <ul>
+    <% @playlist.songs.each do |song| %>
+      <li>
+        <%= song.name %>
+        <%= link_to 'Remove', { action: 'destroy_playlist_song',
+                                    controller: 'playlists',
+                                    id: @playlist.id, song_id: song.id },
+                                    method: :delete  %>
+      </li>
+    <% end %>
+    </ul>
+    <% end %>
+  </div>
+</div>
+
+<br/>
+
+<div class="row">
+  <div class="col-8">
+  <h5>Available</h5>
+  <% if @songs.empty? %>
+  <div class="row">
+    <div class="col-8">
+      <p>No Songs...</p>
+    </div>
+  </div>
+  <% else %>
+  <ul>
+  <% @songs.each do |song| %>
+    <li>
+      <%= song.name %>
+      <%= link_to 'Add', { action: 'new_playlist_song',
+                                controller: 'playlists',
+                                id: @playlist.id, song_id: song.id },
+                                method: :put  %>
+    </li>
+  <% end %>
+  </ul>
+  <% end %>
+  </div>
+</div>
