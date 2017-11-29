@@ -7,13 +7,7 @@
   </div>
 </div>
 
-<% if @genres.empty? %>
-<div class="row">
-  <div class="col-8">
-  <p>No Genres...</p>
-  </div>
-</div>
-<% else %>
+<% if !@genres.empty? %>
 <div class="row">
   <div class="col-8">
     <ul class="nav">
@@ -29,16 +23,16 @@
 
 <br/>
 
-<% if @albums.empty? %>
-<div class="row">
-  <div class="col-8">
-  <p>No Albums</p>
-  </div>
-</div>
-<% else %>
 <div class="row">
   <div class="col-8">
     <h5>Albums <%= link_to 'All Albums', artist_albums_path(@artist) %></h5>
+    <% if @albums.empty? %>
+    <div class="row">
+      <div class="col-8">
+      <p>No Albums...</p>
+      </div>
+    </div>
+    <% else %>
     <ul class="list-unstyled">
     <% @albums.each do |album| %>
       <li class="media my-4">
@@ -50,9 +44,9 @@
       </li>
     <% end %>
     </ul>
+    <% end %>
   </div>
 </div>
-<% end %>
 
 <% if @songs.empty? %>
 <div class="row">

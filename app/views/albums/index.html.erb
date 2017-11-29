@@ -24,9 +24,9 @@
     <div class="media-body">
       <h5><%= album.name %></h5>
       <p>
-        <%= link_to 'View Details', artist_album_path(@artist, album.id) %>
-        <%= link_to 'Edit Album', edit_artist_album_path(@artist, album.id)%>
-        <%= link_to 'Delete Album',  artist_album_path(@artist, album.id), method: :delete %>
+        <%= link_to 'Edit', edit_artist_album_path(@artist, album.id)%>
+        <%= link_to 'Details', artist_album_path(@artist, album.id) %>
+        <%= link_to 'Delete',  artist_album_path(@artist, album.id), method: :delete %>
       </p>
     </div>
   </li>
