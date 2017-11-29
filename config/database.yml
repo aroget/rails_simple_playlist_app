@@ -44,11 +44,11 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
+  production:
+    url: <%= ENV['CLEARDB_DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: heroku_1371c2af28c0673
-  username: bbf14474064627
-  password: <%= ENV['DEMO-APP_DATABASE_PASSWORD'] %>
+# production:
+#   <<: *default
+#   database: heroku_1371c2af28c0673
+#   username: bbf14474064627
+#   password: <%= ENV['DEMO-APP_DATABASE_PASSWORD'] %>
