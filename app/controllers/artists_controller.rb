@@ -13,7 +13,16 @@ class ArtistsController < ApplicationController
   def update
     @artist = Artist.find(params[:id])
 
-    if @artist.update(artist_params)
+    # in order to override the
+    # hash we store it in a new variable
+    form_values = artist_params
+
+    if form_values[:avatar_url]
+      avatar_url = Cloudinary::Uploader.upload(form_values[:avatar_url])['secure_url']
+      form_values[:avatar_url] = avatar_url
+    end
+
+    if @artist.update(form_values)
       redirect_to @artist
     else
       render 'edit'
@@ -22,6 +31,12 @@ class ArtistsController < ApplicationController
 
   def create
     @artist = Artist.new(artist_params)
+
+    if artist_params[:avatar_url]
+      avatar_url = Cloudinary::Uploader.upload(artist_params[:avatar_url])['secure_url']
+      @artist.avatar_url = avatar_url
+    end
+
     if @artist.save
       redirect_to @artist
     else
