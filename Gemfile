@@ -5,6 +5,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# image upload
+gem 'cloudinary'
+
+# local .env
+gem 'figaro'
+
 # bootstrap
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.0.0.beta2.1'

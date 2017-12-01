@@ -13,21 +13,25 @@ class AlbumsController < ApplicationController
   def new
     @genres = Genre.all
     @artist = Artist.find(params[:artist_id])
-    @genres = Genre.all
     @album = Album.new
   end
 
   def create
     @album = Album.new(album_params)
     @artist = Artist.find(params[:artist_id])
+    @album.artist = Artist.find(params[:artist_id])
 
-    @album.artist = @artist
+    if album_params[:cover_image]
+      cover_image = Cloudinary::Uploader.upload(album_params[:cover_image])['secure_url']
+      @album.cover_image = cover_image
+    end
 
     if @album.save
       redirect_to artist_album_path(@artist, @album.id)
     else
       @album.errors.full_messages.each do |msg|
         flash[:error] = msg
+        puts msg
       end
       render 'new'
     end
@@ -43,7 +47,16 @@ class AlbumsController < ApplicationController
     @artist = Artist.find(params[:artist_id])
     @album = Album.find(params[:id])
 
-    if @album.update(album_params)
+    # in order to override the
+    # hash we store it in a new variable
+    form_values = album_params
+
+    if form_values[:cover_image]
+      cover_image = Cloudinary::Uploader.upload(form_values[:cover_image])['secure_url']
+      form_values[:cover_image] = cover_image
+    end
+
+    if @album.update(form_values)
       redirect_to artist_albums_path(@artist)
     else
       render 'edit'
@@ -61,6 +74,6 @@ class AlbumsController < ApplicationController
 
   private
   def album_params
-    params.require(:album).permit(:name, :genre_id, :artist_id)
+    params.require(:album).permit(:name, :genre_id, :artist_id, :cover_image)
   end
 end
