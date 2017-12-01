@@ -19,7 +19,7 @@
     <ul class="list-unstyled">
       <% @artists.each do |artist| %>
         <li class="media my-4">
-          <img class="mr-3" src="https://www.placehold.it/64x64" alt="Generic placeholder image">
+          <div class="mr-3 cover-image" style="background-image: url(<%= if artist.avatar_url.nil? then asset_path 'no-image.png' else artist.avatar_url end %>)"></div>
           <div class="media-body">
             <h5><%= artist.name %></h5>
             <div>

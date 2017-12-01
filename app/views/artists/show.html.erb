@@ -36,7 +36,7 @@
     <ul class="list-unstyled">
     <% @albums.each do |album| %>
       <li class="media my-4">
-        <img class="mr-3" src="https://www.placehold.it/64x64" alt="Generic placeholder image">
+        <div class="mr-3 cover-image" style="background-image: url(<%= if album.cover_image.nil? then asset_path 'no-image.png' else album.cover_image end %>)"></div>
         <div class="media-body">
           <h5><%= album.name %></h5>
           <%= link_to 'Details', artist_album_path(@artist, album.id) %>
