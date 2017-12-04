@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   root 'artists#index'
 
-  get 'signup', to: 'users#new', as: 'signup'
-  post 'signup', to: 'users#create', as: 'new_signup'
+  get '/signup', to: 'users#new', as: 'signup'
+  post '/signup', to: 'users#create', as: 'new_signup'
+
+  get    '/login',   to: 'sessions#new', as: 'login'
+  post   '/login',   to: 'sessions#create', as: 'new_login'
+  delete '/logout',  to: 'sessions#destroy'
+
 
   resources :genres
 
