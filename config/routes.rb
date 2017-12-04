@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root 'artists#index'
 
+  get 'signup', to: 'users#new', as: 'signup'
+  post 'signup', to: 'users#create', as: 'new_signup'
+
   resources :genres
 
   resources :playlists

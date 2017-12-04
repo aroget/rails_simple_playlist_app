@@ -11,6 +11,9 @@
   <body>
     <%= render 'layouts/navbar' %>
     <br/>
+    <% if flash.any? %>
+      <%= render 'layouts/flash' %>
+    <% end %>
     <div class="container">
       <%= yield %>
     </div>
