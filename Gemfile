@@ -11,6 +11,8 @@ gem 'cloudinary'
 # local .env
 gem 'figaro'
 
+gem 'bcrypt'
+
 # bootstrap
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.0.0.beta2.1'
