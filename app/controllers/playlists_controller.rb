@@ -9,26 +9,38 @@ class PlaylistsController < ApplicationController
 
   def new
     @playlist = Playlist.new
+
+    if !logged_in?
+      flash[:warning] = 'Please login...'
+      redirect_to playlists_path
+    end
   end
 
   def create
-    @playlist = Playlist.new(playlist_parms)
+    @playlist = Playlist.new(:name => playlist_parms[:name], :user_id => current_user.id)
 
     if @playlist.save
       redirect_to playlist_path(@playlist)
     else
+      @playlist.errors.full_messages.each do |msg|
+        flash.now[:danger] = msg
+      end
       render 'new'
     end
   end
 
   def edit
     @playlist = Playlist.find(params[:id])
+
+    if !logged_in? || !is_owner(@playlist.user_id)
+      redirect_to playlists_path
+    end
   end
 
   def update
     @playlist = Playlist.find(params[:id])
 
-    if @playlist.update(playlist_parms)
+    if @playlist.update(:name => playlist_parms[:name], :user_id => current_user.id)
       redirect_to playlist_path(@playlist)
     else
       render 'edit'
