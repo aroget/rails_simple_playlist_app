@@ -1,9 +1,21 @@
+<% if !logged_in? %>
+  <div class="row">
+    <div class="col-8 offset-2">
+      <div class="alert alert-info" role="alert">
+        <strong>Heads up!</strong> Please login to create a playlist
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <div class="row">
   <div class="col-8">
     <h2>Playlists <small class="text-muted">List</small></h2>
   </div>
   <div class="col-4 text-sm-right">
-    <%= link_to "New playlist", new_playlist_path, class: "btn btn btn-primary" %>
+    <% if logged_in? %>
+      <%= link_to "New playlist", new_playlist_path, class: "btn btn btn-primary" %>
+    <% end %>
   </div>
 </div>
 
@@ -23,9 +35,13 @@
       <li>
         <p><%= list.name %></p>
         <p>
-        <%= link_to 'Edit', edit_playlist_path(list) %>
-        <%= link_to 'Details', playlist_path(list) %>
-        <%= link_to 'Delete', playlist_path(list), method: :delete %>
+        <% if logged_in? && is_owner(list.user_id) %>
+          <%= link_to 'Edit', edit_playlist_path(list) %>
+          <%= link_to 'Details', playlist_path(list) %>
+          <%= link_to 'Delete', playlist_path(list), method: :delete %>
+        <% else %>
+          <%= link_to 'Details', playlist_path(list) %>
+        <% end %>
         </p>
       </li>
     <% end %>

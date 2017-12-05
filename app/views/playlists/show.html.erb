@@ -3,7 +3,9 @@
     <h2>Playlist <small class="text-muted"><%= @playlist.name %></small></h2>
   </div>
   <div class="col-4 text-sm-right">
-    <%= link_to "Add Song", {controller: "playlists", action: "playlist_songs"}, class: "btn btn btn-primary" %>
+    <% if logged_in? && is_owner(@playlist.user_id) %>
+      <%= link_to "Add Song", {controller: "playlists", action: "playlist_songs"}, class: "btn btn btn-primary" %>
+    <% end %>
   </div>
 </div>
 
