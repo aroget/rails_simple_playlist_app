@@ -7,8 +7,6 @@
   </div>
 </div>
 
-<br/>
-
 <% if @genres.empty? %>
 <div class="row">
   <div class="col-8">
@@ -18,15 +16,18 @@
 <% else %>
 <div class="row">
   <div class="col-8">
-    <ul>
+    <ul class="list-unstyled">
       <% @genres.each do |genre| %>
-        <li>
-          <p><%= genre.name %></p>
-          <p>
-            <%= link_to "Edit", edit_genre_url(genre.id) %>
-            <%= link_to "Details", genre_path(genre) %>
-            <%= link_to "Delete", genre_path(genre), method: :delete %>
-          </p>
+        <li class="media my-4">
+          <div class="mr-3 name-as-cover-image"><%= avataryze(genre.name) %></div>
+          <div class="media-body">
+            <p><%= genre.name %></p>
+            <p>
+              <%= link_to "Edit", edit_genre_url(genre.id) %>
+              <%= link_to "Details", genre_path(genre) %>
+              <%= link_to "Delete", genre_path(genre), method: :delete %>
+            </p>
+          </div>
         </li>
       <% end %>
     </ul>

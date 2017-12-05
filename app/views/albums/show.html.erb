@@ -16,12 +16,15 @@
 </div>
 <% else %>
 <h5>Songs</h5>
-<ul>
+<ul class="list-unstyled">
 <% @songs.each do |song| %>
-  <li>
-  <h5><%= song.name %></h5>
-  <%= link_to 'Edit', edit_artist_album_song_path(@artist, @album, song.id) %>
-  <%= link_to 'Delete', artist_album_song_path(@artist, @album, song.id), method: :delete %>
+  <li class="media my-4">
+    <div class="mr-3 name-as-cover-image"><%= avataryze(song.name) %></div>
+    <div class="media-body">
+      <h5><%= song.name %></h5>
+      <%= link_to 'Edit', edit_artist_album_song_path(@artist, @album, song.id) %>
+      <%= link_to 'Delete', artist_album_song_path(@artist, @album, song.id), method: :delete %>
+    </div>
   </li>
 <% end %>
 </ul>
