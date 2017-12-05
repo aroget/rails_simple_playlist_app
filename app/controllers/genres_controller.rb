@@ -9,7 +9,7 @@ class GenresController < ApplicationController
       redirect_to @genre
     else
       @genre.errors.full_messages.each do |msg|
-        flash[:error] = msg
+        flash[:danger] = msg
       end
 
       redirect_to new_genre_path

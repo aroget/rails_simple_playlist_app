@@ -1,9 +1,6 @@
 <div class="row">
   <div class="col-xs-12 col-sm-6 offset-sm-3">
     <%= form_with model: @genre do |form| %>
-      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-      <% end %>
       <div class="form-group">
         <%= form.label :name %><br>
         <%= form.text_field :name, class:"form-control" %>
