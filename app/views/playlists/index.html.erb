@@ -19,8 +19,6 @@
   </div>
 </div>
 
-<br/>
-
 <% if @playlists.empty? %>
 <div class="row">
   <div class="col-8">
@@ -30,24 +28,28 @@
 <% else %>
 <div class="row">
   <div class="col-8">
-  <ul>
+  <ul class="list-unstyled">
     <% @playlists.each do |list|%>
-      <li>
-        <p><%= list.name %></p>
-        <p>
-        <% if logged_in? && is_owner(list.user_id) %>
-          <%= link_to 'Edit', edit_playlist_path(list) %>
-          <%= link_to 'Details', playlist_path(list) %>
-          <%= link_to 'Delete', playlist_path(list), method: :delete %>
-        <% else %>
-          <%= link_to 'Details', playlist_path(list) %>
-        <% end %>
-        </p>
+      <li class="media my-4">
+        <div class="mr-3 name-as-cover-image"><%= avataryze(list.name) %></div>
+        <div class="media-body">
+          <p><%= list.name %></p>
+          <p>
+          <% if logged_in? && is_owner(list.user_id) %>
+            <%= link_to 'Edit', edit_playlist_path(list) %>
+            <%= link_to 'Details', playlist_path(list) %>
+            <%= link_to 'Delete', playlist_path(list), method: :delete %>
+          <% else %>
+            <%= link_to 'Details', playlist_path(list) %>
+          <% end %>
+          </p>
+        </div>
       </li>
     <% end %>
     </ul>
   </div>
 </div>
 <% end %>
+
 
 

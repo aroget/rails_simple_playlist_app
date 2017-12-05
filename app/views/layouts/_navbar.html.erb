@@ -18,7 +18,7 @@
         </li>
       </ul>
       <% if logged_in? %>
-        <span>Hello, <%= current_user.name %></span>
+        <span>Hello, <%= current_user.name.capitalize %></span>
         <%= link_to 'Sign Out', logout_path, method: :delete, class: "nav-link" %>
       <% else %>
         <%= link_to 'Sign In', login_path, class: "nav-link" %>
