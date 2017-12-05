@@ -33,7 +33,9 @@
       <li class="media my-4">
         <div class="mr-3 name-as-cover-image"><%= avataryze(list.name) %></div>
         <div class="media-body">
-          <p><%= list.name %></p>
+          <p>
+            <%= list.name %>
+            <span class="text-muted">| <%= list.user.user_name %></span></p>
           <p>
           <% if logged_in? && is_owner(list.user_id) %>
             <%= link_to 'Edit', edit_playlist_path(list) %>
