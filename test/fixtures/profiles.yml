@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  country: MyString
+  string,: MyString
+  bio: MyString
+  string,: MyString
+  avatar: MyString
+  string: MyString
+
+two:
+  country: MyString
+  string,: MyString
+  bio: MyString
+  string,: MyString
+  avatar: MyString
+  string: MyString

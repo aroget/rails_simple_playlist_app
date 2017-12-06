@@ -5,6 +5,12 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
 
+    profile = Profile.find_by(user_id:user.id)
+
+    if profile.nil?
+      create_profile(user.id)
+    end
+
     if user && user.authenticate(params[:session][:password])
       log_in user
       redirect_to root_url
@@ -23,5 +29,9 @@ class SessionsController < ApplicationController
   private
   def session_params
     params.require(:session).permit(:email, :password)
+  end
+
+  def create_profile(user_id)
+    Profile.create(user_id:user_id)
   end
 end

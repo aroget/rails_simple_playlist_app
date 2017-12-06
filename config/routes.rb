@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   resources :genres
 
+  resources :profiles, only: [:show, :edit,]
+
   resources :playlists
 
   resources :artists do

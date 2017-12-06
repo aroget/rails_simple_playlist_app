@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
 
+  has_one :profile, dependent: :destroy
+
   has_many :playlists, dependent: :destroy
 
   before_save { self.email = email.downcase }

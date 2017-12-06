@@ -5,6 +5,8 @@ Working on adding authentication and other features...
 
 ### TODO
 - [ ] Profile Page
-- [ ] Search on Playlist
-- [ ] Delete account
+- [ ] Delete Account
+- [ ] Private / Public Playlist
+- [ ] Likes / Liked Playlists
+- [ ] Search on Playlists
 - [ ] Welcome Email

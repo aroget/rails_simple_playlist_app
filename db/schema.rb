@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171205123026) do
+ActiveRecord::Schema.define(version: 20171206124053) do
 
   create_table "albums", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -57,6 +57,16 @@ ActiveRecord::Schema.define(version: 20171205123026) do
     t.index ["song_id"], name: "index_playlists_songs_on_song_id"
   end
 
+  create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "country"
+    t.text "bio"
+    t.string "avatar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "fk_rails_e424190865"
+  end
+
   create_table "songs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.bigint "album_id"
@@ -83,6 +93,7 @@ ActiveRecord::Schema.define(version: 20171205123026) do
   add_foreign_key "playlists", "users"
   add_foreign_key "playlists_songs", "playlists"
   add_foreign_key "playlists_songs", "songs"
+  add_foreign_key "profiles", "users"
   add_foreign_key "songs", "albums"
   add_foreign_key "songs", "artists"
 end
