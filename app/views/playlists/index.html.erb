@@ -19,13 +19,6 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-8 offset-2 text-center">
-    <%= link_to 'All', playlists_path %>
-    <%= link_to 'My Playlist', query: "by-author" %>
-  </div>
-</div>
-
 <% if @playlists.empty? %>
 <div class="row">
   <div class="col-8">
@@ -33,6 +26,13 @@
   </div>
 </div>
 <% else %>
+<div class="row">
+  <div class="col-8">
+    <%= link_to 'View All', playlists_path %>
+    <%= link_to 'View Mine', query: "by-author" %>
+  </div>
+</div>
+<br/>
 <div class="row">
   <div class="col-8">
   <ul class="list-unstyled">
