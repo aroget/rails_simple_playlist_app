@@ -18,8 +18,23 @@
         </li>
       </ul>
       <% if logged_in? %>
-        <span>Hello, <%= current_user.name.capitalize %></span>
-        <%= link_to 'Sign Out', logout_path, method: :delete, class: "nav-link" %>
+        <span class="nav-item dropdown">
+          <a
+            href="#"
+            role="button"
+            id="navbarDropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            data-toggle="dropdown"
+            class="nav-link dropdown-toggle">
+            Hello, <%= current_user.first_name.capitalize %>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to 'Profile', profile_path(current_user.id), class: "nav-link" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to 'Sign Out', logout_path, method: :delete, class: "nav-link" %>
+          </div>
+        </span>
       <% else %>
         <%= link_to 'Sign In', login_path, class: "nav-link" %>
         <%= link_to 'Sign Up', signup_path, class: "nav-link" %>

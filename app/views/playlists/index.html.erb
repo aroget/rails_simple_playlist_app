@@ -28,12 +28,21 @@
 <% else %>
 <div class="row">
   <div class="col-8">
+    <%= link_to 'View All', playlists_path %>
+    <%= link_to 'View Mine', query: "by-author" %>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="col-8">
   <ul class="list-unstyled">
     <% @playlists.each do |list|%>
       <li class="media my-4">
         <div class="mr-3 name-as-cover-image"><%= avataryze(list.name) %></div>
         <div class="media-body">
-          <p><%= list.name %></p>
+          <p>
+            <%= list.name %>
+            <span class="text-muted">| <%= list.user.user_name %></span></p>
           <p>
           <% if logged_in? && is_owner(list.user_id) %>
             <%= link_to 'Edit', edit_playlist_path(list) %>
