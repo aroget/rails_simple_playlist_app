@@ -1,11 +1,12 @@
 class ProfilesController < ApplicationController
+  before_action :check_user, only: [:edit, :update]
+
   def show
     @profile = Profile.find(params[:id])
     @user = @profile.user
   end
 
   def edit
-    check_user
     @profile = Profile.find(params[:id])
     @user = @profile.user
   end
