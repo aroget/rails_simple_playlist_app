@@ -1,2 +1,50 @@
-<h1>Profiles#edit</h1>
-<p>Find me in app/views/profiles/edit.html.erb</p>
+<div class="row">
+  <div class="col-8">
+    <h2>Edit <small class="text-muted"><%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %></small></h2>
+  </div>
+  <div class="col-4 text-sm-right">
+    <%= link_to "Back", profile_path(@profile), class: "btn btn-link" %>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col-8">
+  <%= form_for @profile do |form| %>
+    <div class="row">
+      <div class="col-5">
+        <div class="form-group">
+          <p><%= image_tag(@profile.avatar, size: "120x120") %></p>
+
+          <%= form.file_field :avatar %>
+        </div>
+        <br/>
+        <h4><%= @user.user_name %></h4>
+        <br/>
+
+        <p>Playlists: <span class="text-muted"><%= @user.playlists.count %></span></p>
+
+        <p>Email: <span class="text-muted"><%= @user.email %></span></p>
+
+        <% if @profile.country %>
+          <p>Country: <span class="text-muted"><%= @profile.country %></span></p>
+        <% end %>
+
+        <p>Joined: <span class="text-muted"><%= @user.created_at.to_formatted_s(:long) %></span></p>
+      </div>
+      <div class="col-7">
+        <h5>About</h5>
+          <div class="form-group">
+            <%= form.label :bio %><br>
+            <%= form.text_area :bio, size: "60x12", class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.submit class: "btn btn-primary" %>
+          </div>
+      </div>
+    </div>
+  <%end %>
+  </div>
+</div>
