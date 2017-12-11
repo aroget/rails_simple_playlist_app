@@ -1,6 +1,7 @@
 class ArtistsController < ApplicationController
   def index
     @artists = Artist.all
+    UserMailer.welcome_message(current_user).deliver
   end
 
   def show
