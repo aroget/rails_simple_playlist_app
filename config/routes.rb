@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :genres
 
-  resources :profiles, only: [:show, :edit,]
+  resources :profiles, only: [:show, :edit, :update]
 
   resources :playlists
 

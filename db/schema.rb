@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171206124053) do
+ActiveRecord::Schema.define(version: 20171211114415) do
 
   create_table "albums", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20171206124053) do
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "country"
     t.text "bio"
-    t.string "avatar"
+    t.string "avatar", default: "https://www.placehold.it/120x120"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
