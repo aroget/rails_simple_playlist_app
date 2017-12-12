@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171212111041) do
+ActiveRecord::Schema.define(version: 20171212121610) do
 
   create_table "albums", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -41,6 +41,15 @@ ActiveRecord::Schema.define(version: 20171212111041) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "playlist_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["playlist_id"], name: "fk_rails_ba8988c7ba"
+    t.index ["user_id"], name: "fk_rails_1e09b5dabf"
+  end
+
   create_table "playlists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.integer "likes", default: 0
@@ -48,13 +57,6 @@ ActiveRecord::Schema.define(version: 20171212111041) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "fk_rails_d67ef1eb45"
-  end
-
-  create_table "playlists_likes", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "playlist_id"
-    t.bigint "user_id"
-    t.index ["playlist_id"], name: "index_playlists_likes_on_playlist_id"
-    t.index ["user_id"], name: "index_playlists_likes_on_user_id"
   end
 
   create_table "playlists_songs", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -95,15 +97,10 @@ ActiveRecord::Schema.define(version: 20171212111041) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  create_table "users_favorites", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "user_id"
-    t.bigint "playlist_id"
-    t.index ["playlist_id"], name: "index_users_favorites_on_playlist_id"
-    t.index ["user_id"], name: "index_users_favorites_on_user_id"
-  end
-
   add_foreign_key "albums", "artists"
   add_foreign_key "albums", "genres"
+  add_foreign_key "likes", "playlists"
+  add_foreign_key "likes", "users"
   add_foreign_key "playlists", "users"
   add_foreign_key "playlists_songs", "playlists"
   add_foreign_key "playlists_songs", "songs"

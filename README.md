@@ -10,5 +10,7 @@ Working on adding authentication and other features...
 - [ ] Private / Public Playlist
 - [ ] Tags
 - [ ] Recommendation feed
+- [ ] Password Reset
 - [ ] Delete Account
+- [ ] Seed DB
 - [ ] Search on Playlists

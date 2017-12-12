@@ -45,15 +45,23 @@
           <p>
             <%= list.name %>
             <span class="text-muted">| <%= list.user.user_name %></span></p>
-          <p>
           <% if logged_in? && is_owner(list.user_id) %>
+          <p>
             <%= link_to 'Edit', edit_playlist_path(list) %>
             <%= link_to 'Details', playlist_path(list) %>
             <%= link_to 'Delete', playlist_path(list), method: :delete %>
-          <% else %>
-            <%= link_to 'Details', playlist_path(list) %>
-          <% end %>
           </p>
+          <% else %>
+          <p>
+            <%= link_to 'Details', playlist_path(list) %>
+          </p>
+          <% end %>
+          <% if logged_in? %>
+          <p>
+          Likes <%= list.likes.count %>
+            <%# <%= link_to 'favorite' + list.likes, edit_playlist_path(list), class: 'material-icons' %>
+          </p>
+          <% end %>
         </div>
       </li>
     <% end %>
