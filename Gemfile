@@ -13,6 +13,9 @@ gem 'figaro'
 
 gem 'bcrypt'
 
+# email
+gem 'sendgrid-ruby'
+
 # bootstrap
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.0.0.beta2.1'

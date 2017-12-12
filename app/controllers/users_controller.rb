@@ -9,6 +9,8 @@ class UsersController < ApplicationController
     if @user.save
       create_profile(@user.id)
 
+      UserMailer.welcome_message(@user).deliver
+
       flash[:success] = 'Account created successfully'
       redirect_to root_path
     else
