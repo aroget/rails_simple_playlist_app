@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171211114415) do
+ActiveRecord::Schema.define(version: 20171212111041) do
 
   create_table "albums", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -50,6 +50,13 @@ ActiveRecord::Schema.define(version: 20171211114415) do
     t.index ["user_id"], name: "fk_rails_d67ef1eb45"
   end
 
+  create_table "playlists_likes", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "playlist_id"
+    t.bigint "user_id"
+    t.index ["playlist_id"], name: "index_playlists_likes_on_playlist_id"
+    t.index ["user_id"], name: "index_playlists_likes_on_user_id"
+  end
+
   create_table "playlists_songs", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "playlist_id", null: false
     t.bigint "song_id", null: false
@@ -86,6 +93,13 @@ ActiveRecord::Schema.define(version: 20171211114415) do
     t.string "last_name", null: false
     t.string "user_name", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  create_table "users_favorites", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "playlist_id"
+    t.index ["playlist_id"], name: "index_users_favorites_on_playlist_id"
+    t.index ["user_id"], name: "index_users_favorites_on_user_id"
   end
 
   add_foreign_key "albums", "artists"
