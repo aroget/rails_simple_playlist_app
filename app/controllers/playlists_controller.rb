@@ -1,6 +1,6 @@
 class PlaylistsController < ApplicationController
   def index
-    @playlists = if params['query'] == 'by-author' then Playlist.where(user_id: current_user.id) else Playlist.all end
+    @playlists = if params['author'] then Playlist.where(user_id: params['author']) else Playlist.all end
   end
 
   def show

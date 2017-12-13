@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
   resources :genres
 
-  resources :profiles, only: [:show, :edit, :update]
+  resources :profiles, only: [:show, :edit, :update] do
+    resources :likes, only: [:index]
+  end
 
   resources :playlists do
     resources :likes, only: [:create, :destroy]

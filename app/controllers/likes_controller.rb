@@ -1,4 +1,9 @@
 class LikesController < ApplicationController
+  def index
+    @profile = Profile.find(params[:profile_id])
+    @likes = @profile.user.likes
+  end
+
   def destroy
     @playlist = Playlist.find(params[:playlist_id])
     like = Like.find_by(:user_id => current_user.id, :playlist_id => @playlist.id)

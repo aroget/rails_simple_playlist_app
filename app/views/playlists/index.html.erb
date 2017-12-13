@@ -30,7 +30,7 @@
 <div class="row">
   <div class="col-8">
     <%= link_to 'View All', playlists_path %>
-    <%= link_to 'View Mine', query: "by-author" %>
+    <%= link_to 'View Mine', author: current_user.id %>
   </div>
 </div>
 <% end %>

@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-8">
+    <h2>Likes <small class="text-muted"><%= @profile.user.first_name.capitalize %> <%= @profile.user.last_name.capitalize %></small></h2>
+  </div>
+  <div class="col-4 text-sm-right">
+    <%= link_to "Back to Profile", profile_path(@profile), class: "btn btn btn-link" %>
+  </div>
+</div>
+
+<% if @likes.empty? %>
+<div class="row">
+  <div class="col-8">
+    <p>No Likes...</p>
+  </div>
+</div>
+<% else %>
+<div class="row">
+  <div class="col-8">
+    <ul class="list-unstyled">
+      <% @likes.each do |list|%>
+        <li class="media my-4">
+          <div class="mr-3 name-as-cover-image"><%= avataryze(list.playlist.name) %></div>
+          <div class="media-body">
+            <p>
+              <%= list.playlist.name %>
+              <span class="text-muted">| <%= list.playlist.user.user_name %></span></p>
+            <% if logged_in? && is_owner(list.playlist.user_id) %>
+            <p>
+              <%= link_to 'Edit', edit_playlist_path(list) %>
+              <%= link_to 'Details', playlist_path(list) %>
+              <%= link_to 'Delete', playlist_path(list), method: :delete %>
+            </p>
+            <% else %>
+            <p>
+              <%= link_to 'Details', playlist_path(list) %>
+            </p>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+      </ul>
+  </div>
+</div>
+<% end %>

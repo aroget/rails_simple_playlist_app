@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   has_many :playlists, dependent: :destroy
 
-  has_many :favorites, through: :users_favorites
+  has_many :likes
 
   before_save { self.email = email.downcase }
 

@@ -6,7 +6,7 @@ Working on adding authentication and other features...
 ### TODO
 - [X] Profile Page
 - [X] Welcome Email
-- [ ] Likes / Liked Playlists
+- [X] Likes / Liked Playlists
 - [ ] Private / Public Playlist
 - [ ] Tags
 - [ ] Recommendation feed
