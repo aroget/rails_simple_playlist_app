@@ -8,12 +8,13 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create', as: 'new_login'
   delete '/logout',  to: 'sessions#destroy'
 
-
   resources :genres
 
   resources :profiles, only: [:show, :edit, :update]
 
-  resources :playlists
+  resources :playlists do
+    resources :likes, only: [:create, :destroy]
+  end
 
   resources :artists do
     resources :albums do

@@ -58,8 +58,13 @@
           <% end %>
           <% if logged_in? %>
           <p>
-          Likes <%= list.likes.count %>
-            <%# <%= link_to 'favorite' + list.likes, edit_playlist_path(list), class: 'material-icons' %>
+          <% if user_liked?(list.id, current_user.id) %>
+
+            <%= list.likes.count %> <%= link_to 'favorite', playlist_like_path(list, like_id(list.id)), method: :delete,  class: 'material-icons' %>
+
+          <% else %>
+            <%= link_to 'favorite_border', playlist_likes_path(list), method: :post,  class: 'material-icons' %>
+          <% end %>
           </p>
           <% end %>
         </div>
