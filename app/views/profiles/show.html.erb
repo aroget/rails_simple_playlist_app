@@ -25,7 +25,7 @@
 
         <p>
           Likes: <span class="text-muted"><%= @user.likes.count %></span>
-          <%= link_to 'View All', playlists_path, class: 'badge badge-default float-right' %>
+          <%= link_to 'View All', profile_likes_path(@user.profile.id), class: 'badge badge-default float-right' %>
         </p>
 
         <p>
