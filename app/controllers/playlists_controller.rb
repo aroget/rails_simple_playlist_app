@@ -17,7 +17,9 @@ class PlaylistsController < ApplicationController
   end
 
   def create
-    @playlist = Playlist.new(:name => playlist_parms[:name], :user_id => current_user.id)
+    @playlist = Playlist.new(:name => playlist_parms[:name],
+                             :user_id => current_user.id,
+                             :public => playlist_parms[:public])
 
     if @playlist.save
       redirect_to playlist_path(@playlist)
@@ -40,7 +42,9 @@ class PlaylistsController < ApplicationController
   def update
     @playlist = Playlist.find(params[:id])
 
-    if @playlist.update(:name => playlist_parms[:name], :user_id => current_user.id)
+    if @playlist.update(:name => playlist_parms[:name],
+                        :user_id => current_user.id,
+                        :public => playlist_parms[:public])
       redirect_to playlist_path(@playlist)
     else
       render 'edit'
@@ -81,6 +85,6 @@ class PlaylistsController < ApplicationController
 
   private
   def playlist_parms
-    params.require(:playlist).permit(:name)
+    params.require(:playlist).permit(:name, :public)
   end
 end
