@@ -5,14 +5,15 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
 
-    profile = Profile.find_by(user_id:user.id)
-
-    if profile.nil?
-      create_profile(user.id)
-    end
-
     if user && user.authenticate(params[:session][:password])
       log_in user
+
+      profile = Profile.find_by(user_id:user.id)
+
+      if profile.nil?
+        create_profile(user.id)
+      end
+
       redirect_to root_url
     else
       flash.now[:danger] = 'Credentials do not match any record'

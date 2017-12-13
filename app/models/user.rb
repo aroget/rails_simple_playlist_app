@@ -5,6 +5,8 @@ class User < ApplicationRecord
 
   has_many :playlists, dependent: :destroy
 
+  has_many :favorites, through: :users_favorites
+
   before_save { self.email = email.downcase }
 
   validates :first_name, presence: true, length: { maximum: 50 }
