@@ -23,7 +23,16 @@
         <h4><%= @user.user_name %></h4>
         <br/>
 
-        <p>Playlists: <span class="text-muted"><%= @user.playlists.count %></span></p>
+        <p>
+          Likes: <span class="text-muted"><%= @user.likes.count %></span>
+          <%= link_to 'View All', playlists_path, class: 'badge badge-default float-right' %>
+        </p>
+
+        <p>
+          Playlists:
+          <span class="text-muted"><%= @user.playlists.count %></span>
+          <%= link_to 'View All', playlists_path(author: @user.id), class: 'badge badge-default float-right' %>
+        </p>
 
         <p>Email: <span class="text-muted"><%= @user.email %></span></p>
 
