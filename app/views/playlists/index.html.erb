@@ -44,7 +44,13 @@
         <div class="media-body">
           <p>
             <%= list.name %>
-            <span class="text-muted">| <%= list.user.user_name %></span></p>
+            <span class="text-muted">
+              | <%= list.user.user_name %>
+              <% if !list.public %>
+                <i style="font-size: 12px;" class="material-icons">lock</i>
+              <% end %>
+            </span>
+          </p>
           <% if logged_in? && is_owner(list.user_id) %>
           <p>
             <%= link_to 'Edit', edit_playlist_path(list) %>

@@ -10,4 +10,8 @@ module PlaylistsHelper
   def like_id(playlist_id)
     Like.find_by(:playlist_id => playlist_id, :user_id => current_user.id)
   end
+
+  def not_owner(playlist)
+    playlist.user_id.to_i != current_user.id.to_i
+  end
 end

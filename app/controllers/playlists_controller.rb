@@ -1,10 +1,16 @@
 class PlaylistsController < ApplicationController
   def index
-    @playlists = if params['author'] then Playlist.where(user_id: params['author']) else Playlist.all end
+    @playlists = if params['author'] then get_all_playlists(params['author']) else get_all_playlists end
   end
 
   def show
-    @playlist = Playlist.find(params[:id])
+    playlist = Playlist.find(params[:id])
+
+    if !playlist.public
+      redirect_to playlists_path if not_owner(playlist)
+    end
+
+    @playlist = playlist
   end
 
   def new
@@ -17,7 +23,9 @@ class PlaylistsController < ApplicationController
   end
 
   def create
-    @playlist = Playlist.new(:name => playlist_parms[:name], :user_id => current_user.id)
+    @playlist = Playlist.new(:name => playlist_parms[:name],
+                             :user_id => current_user.id,
+                             :public => playlist_parms[:public])
 
     if @playlist.save
       redirect_to playlist_path(@playlist)
@@ -40,7 +48,9 @@ class PlaylistsController < ApplicationController
   def update
     @playlist = Playlist.find(params[:id])
 
-    if @playlist.update(:name => playlist_parms[:name], :user_id => current_user.id)
+    if @playlist.update(:name => playlist_parms[:name],
+                        :user_id => current_user.id,
+                        :public => playlist_parms[:public])
       redirect_to playlist_path(@playlist)
     else
       render 'edit'
@@ -81,6 +91,18 @@ class PlaylistsController < ApplicationController
 
   private
   def playlist_parms
-    params.require(:playlist).permit(:name)
+    params.require(:playlist).permit(:name, :public)
+  end
+
+  def get_all_playlists(user_id = nil)
+    if user_id === nil
+      Playlist.all.where(:public => true)
+    else
+      if user_id.to_i == current_user.id.to_i
+        Playlist.all.where(:user_id => user_id)
+      else
+        Playlist.all.where(:public => true, :user_id => user_id)
+      end
+    end
   end
 end

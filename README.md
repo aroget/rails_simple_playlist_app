@@ -7,10 +7,10 @@ Working on adding authentication and other features...
 - [X] Profile Page
 - [X] Welcome Email
 - [X] Likes / Liked Playlists
-- [ ] Private / Public Playlist
+- [X] Private / Public Playlist
+- [ ] Search on Playlists
 - [ ] Tags
 - [ ] Recommendation feed
 - [ ] Password Reset
 - [ ] Delete Account
 - [ ] Seed DB
-- [ ] Search on Playlists
