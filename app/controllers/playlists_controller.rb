@@ -1,6 +1,10 @@
 class PlaylistsController < ApplicationController
   def index
-    @playlists = if params['author'] then get_all_playlists(params['author']) else get_all_playlists end
+    if params[:search]
+      @playlists = Playlist.search(params[:search]).order("created_at DESC")
+    else
+      @playlists = if params['author'] then get_all_playlists(params['author']) else get_all_playlists end
+    end
   end
 
   def show

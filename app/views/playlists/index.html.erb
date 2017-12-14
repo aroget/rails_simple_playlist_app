@@ -34,7 +34,20 @@
   </div>
 </div>
 <% end %>
+
 <br/>
+
+<div class="row">
+  <div class="col-4">
+    <%= form_tag playlists_path, :method => 'get', :enforce_utf8 => false do %>
+      <div class="form-group">
+        <%= text_field_tag :search, params[:search], :placeholder => "Search...", :class => "form-control" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
 <div class="row">
   <div class="col-8">
   <ul class="list-unstyled">

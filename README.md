@@ -8,7 +8,7 @@ Working on adding authentication and other features...
 - [X] Welcome Email
 - [X] Likes / Liked Playlists
 - [X] Private / Public Playlist
-- [ ] Search on Playlists
+- [X] Simple Search on Playlists
 - [ ] Tags
 - [ ] Recommendation feed
 - [ ] Password Reset
