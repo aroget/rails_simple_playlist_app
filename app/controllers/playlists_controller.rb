@@ -19,6 +19,7 @@ class PlaylistsController < ApplicationController
 
   def new
     @playlist = Playlist.new
+    @tags = Tag.all
 
     if !logged_in?
       flash[:warning] = 'Please login...'
@@ -27,7 +28,10 @@ class PlaylistsController < ApplicationController
   end
 
   def create
+    tag = Tag.find(playlist_parms[:tag])
+
     @playlist = Playlist.new(:name => playlist_parms[:name],
+                             :tag => tag,
                              :user_id => current_user.id,
                              :public => playlist_parms[:public])
 
@@ -42,6 +46,7 @@ class PlaylistsController < ApplicationController
   end
 
   def edit
+    @tags = Tag.all
     @playlist = Playlist.find(params[:id])
 
     if !logged_in? || !is_owner(@playlist.user_id)
@@ -50,11 +55,15 @@ class PlaylistsController < ApplicationController
   end
 
   def update
+    @tags = Tag.all
     @playlist = Playlist.find(params[:id])
+    tag = Tag.find(playlist_parms[:tag])
 
     if @playlist.update(:name => playlist_parms[:name],
                         :user_id => current_user.id,
+                        :tag => tag,
                         :public => playlist_parms[:public])
+
       redirect_to playlist_path(@playlist)
     else
       render 'edit'
@@ -95,7 +104,7 @@ class PlaylistsController < ApplicationController
 
   private
   def playlist_parms
-    params.require(:playlist).permit(:name, :public)
+    params.require(:playlist).permit(:name, :public, :tag)
   end
 
   def get_all_playlists(user_id = nil)

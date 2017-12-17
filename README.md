@@ -9,7 +9,7 @@ Working on adding authentication and other features...
 - [X] Likes / Liked Playlists
 - [X] Private / Public Playlist
 - [X] Simple Search on Playlists
-- [ ] Tags
+- [X] Tags
 - [ ] Recommendation feed
 - [ ] Password Reset
 - [ ] Delete Account
