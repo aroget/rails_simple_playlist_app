@@ -20,6 +20,10 @@ class LikesController < ApplicationController
     @like = Like.new(:playlist_id => params[:playlist_id], :user_id => current_user.id)
 
     if @like.save
+
+      if @playlist.user_id != current_user.id
+        LikesMailer.new_like_message(@playlist.user).deliver
+      end
       redirect_to playlists_path
     else
       @like.errors.full_messages do |msg|

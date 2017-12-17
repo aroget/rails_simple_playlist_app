@@ -109,12 +109,12 @@ class PlaylistsController < ApplicationController
 
   def get_all_playlists(user_id = nil)
     if user_id === nil
-      Playlist.all.where(:public => true)
+      Playlist.order(id: :desc).where(:public => true)
     else
       if user_id.to_i == current_user.id.to_i
-        Playlist.all.where(:user_id => user_id)
+        Playlist.order(id: :desc).where(:user_id => user_id)
       else
-        Playlist.all.where(:public => true, :user_id => user_id)
+        Playlist.order(id: :desc).where(:public => true, :user_id => user_id)
       end
     end
   end
