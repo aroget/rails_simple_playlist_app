@@ -28,14 +28,14 @@ class PlaylistsController < ApplicationController
   end
 
   def create
+    tag = Tag.find(playlist_parms[:tag])
+
     @playlist = Playlist.new(:name => playlist_parms[:name],
+                             :tag => tag,
                              :user_id => current_user.id,
                              :public => playlist_parms[:public])
 
     if @playlist.save
-      tag = Tag.find(playlist_parms[:tags])
-      @playlist.tags.append(tag)
-
       redirect_to playlist_path(@playlist)
     else
       @playlist.errors.full_messages.each do |msg|
@@ -55,14 +55,15 @@ class PlaylistsController < ApplicationController
   end
 
   def update
+    @tags = Tag.all
     @playlist = Playlist.find(params[:id])
+    tag = Tag.find(playlist_parms[:tag])
 
     if @playlist.update(:name => playlist_parms[:name],
                         :user_id => current_user.id,
+                        :tag => tag,
                         :public => playlist_parms[:public])
 
-      tag = Tag.find(playlist_parms[:tags])
-      @playlist.tags.append(tag)
       redirect_to playlist_path(@playlist)
     else
       render 'edit'
@@ -103,7 +104,7 @@ class PlaylistsController < ApplicationController
 
   private
   def playlist_parms
-    params.require(:playlist).permit(:name, :public, :tags)
+    params.require(:playlist).permit(:name, :public, :tag)
   end
 
   def get_all_playlists(user_id = nil)

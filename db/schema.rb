@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171217000147) do
+ActiveRecord::Schema.define(version: 20171217012632) do
 
   create_table "albums", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(version: 20171217000147) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.boolean "public", default: true
+    t.bigint "tag_id"
+    t.index ["tag_id"], name: "fk_rails_93e8c68f2d"
     t.index ["user_id"], name: "fk_rails_d67ef1eb45"
   end
 
@@ -65,11 +67,6 @@ ActiveRecord::Schema.define(version: 20171217000147) do
     t.bigint "song_id", null: false
     t.index ["playlist_id"], name: "index_playlists_songs_on_playlist_id"
     t.index ["song_id"], name: "index_playlists_songs_on_song_id"
-  end
-
-  create_table "playlists_tags", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "playlist_id", null: false
-    t.bigint "tag_id", null: false
   end
 
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -113,6 +110,7 @@ ActiveRecord::Schema.define(version: 20171217000147) do
   add_foreign_key "albums", "genres"
   add_foreign_key "likes", "playlists"
   add_foreign_key "likes", "users"
+  add_foreign_key "playlists", "tags"
   add_foreign_key "playlists", "users"
   add_foreign_key "playlists_songs", "playlists"
   add_foreign_key "playlists_songs", "songs"

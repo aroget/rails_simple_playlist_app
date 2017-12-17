@@ -13,9 +13,9 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :tags %>
+      <%= f.label :tag %>
 
-      <%= f.select :tags, options_for_select(@tags.map { |tag| [tag.name, tag.id] }, @playlist.tags ? @playlist.tags.last.id : nil), class: "form-control" %>
+      <%= f.select :tag, options_for_select(@tags.map { |tag| [tag.name, tag.id] }, @playlist.tag_id ? @playlist.tag_id : nil), class: "form-control" %>
     </div>
 
 

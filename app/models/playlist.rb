@@ -3,7 +3,7 @@ class Playlist < ApplicationRecord
   validates :user_id, presence: true
 
   belongs_to :user
-  has_and_belongs_to_many :tags
+  belongs_to :tag
   has_and_belongs_to_many :songs
 
   has_many :likes
